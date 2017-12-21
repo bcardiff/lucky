@@ -54,6 +54,13 @@ describe Lucky::ProtectFromForgery do
   end
 
   it "halts with 403 if there is no token" do
+    context = build_context
+    context.session["X-CSRF-TOKEN"] = "my_token"
+
+    response = ProtectedAction::Index.new(context, params).call
+
+    response.status.should eq(403)
+    response.body.should eq("")
   end
 
   it "lets allowed HTTP methods through without a token" do

@@ -20,7 +20,7 @@ module Lucky::ProtectFromForgery
   end
 
   private def user_provided_token
-    params.get("_csrf") || headers["X-CSRF-TOKEN"]
+    params.get("_csrf") || headers["X-CSRF-TOKEN"]?
   end
 
   def forbid_access_because_of_missing_token
