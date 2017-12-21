@@ -42,15 +42,15 @@ describe Lucky::ProtectFromForgery do
     response.body.should eq("")
   end
 
-  pending "halts with 403 if the param token is incorrect" do
+  it "halts with 403 if the param token is incorrect" do
     context = build_context
     context.session["X-CSRF-TOKEN"] = "my_token"
-    context.request.headers["X-CSRF-TOKEN"] = "my_token"
+    params = {"_csrf" => "incorrect"}
 
     response = ProtectedAction::Index.new(context, params).call
 
-    response.status.should eq(200)
-    response.body.should eq("Passed")
+    response.status.should eq(403)
+    response.body.should eq("")
   end
 
   it "halts with 403 if there is no token" do
