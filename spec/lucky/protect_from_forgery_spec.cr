@@ -9,7 +9,13 @@ class ProtectedAction::Index < Lucky::Action
 end
 
 describe Lucky::ProtectFromForgery do
-  pending "sets the CSRF token in the session" do
+  it "sets the CSRF token in the session" do
+    context = build_context(method: "GET")
+    context.session["X-CSRF-TOKEN"].should be_nil
+
+    response = ProtectedAction::Index.new(context, params).call
+
+    context.session["X-CSRF-TOKEN"].not_nil!.empty?.should_not be_true
   end
 
   it "continues if the token in the parameter is correct" do
