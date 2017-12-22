@@ -67,7 +67,7 @@ describe Lucky::ProtectFromForgery do
   end
 
   it "lets allowed HTTP methods through without a token" do
-    %w(GET HEAD OPTIONS TRACE).each do |http_method|
+    Lucky::ProtectFromForgery::ALLOWED_METHODS.each do |http_method|
       context = build_context(method: http_method)
 
       response = ProtectedAction::Index.new(context, params).call
