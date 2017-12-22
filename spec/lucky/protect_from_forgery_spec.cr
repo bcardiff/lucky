@@ -15,7 +15,7 @@ describe Lucky::ProtectFromForgery do
 
     response = ProtectedAction::Index.new(context, params).call
 
-    context.session["X-CSRF-TOKEN"].not_nil!.empty?.should_not be_true
+    (context.session["X-CSRF-TOKEN"].not_nil!.size > 30).should be_true
   end
 
   it "continues if the token in the parameter is correct" do

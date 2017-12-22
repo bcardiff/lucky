@@ -6,7 +6,7 @@ module Lucky::ProtectFromForgery
   end
 
   private def protect_from_forgery
-    ensure_request_has_csrf_token
+    ensure_csrf_token_in_session
     if request_does_not_require_protection? || valid_csrf_token?
       continue
     else
@@ -14,7 +14,7 @@ module Lucky::ProtectFromForgery
     end
   end
 
-  private def ensure_request_has_csrf_token
+  private def ensure_csrf_token_in_session
     session["X-CSRF-TOKEN"] ||= SecureRandom.urlsafe_base64(32)
   end
 
