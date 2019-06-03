@@ -59,8 +59,8 @@ dependencies:
 
 development_dependencies:
   ameba:
-    github: veelenga/ameba
-    version: ~> 0.9
+    github: bcardiff/ameba
+    branch: crystal/0.29.0
 
 scripts:
   postinstall: script/precompile_tasks
