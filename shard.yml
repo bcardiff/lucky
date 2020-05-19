@@ -65,8 +65,10 @@ dependencies:
 
 development_dependencies:
   ameba:
-    github: veelenga/ameba
-    version: 0.12.1
+    github: bcardiff/ameba
+    branch: crystal/0.35.0
+    # github: veelenga/ameba
+    # version: 0.12.1
 
 scripts:
   postinstall: script/precompile_tasks
