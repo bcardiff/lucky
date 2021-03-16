@@ -196,7 +196,7 @@ describe Lucky::CookieJar do
       headers["Cookie"] = "name=Rick%20James"
 
       jar = Lucky::CookieJar.from_request_cookies(
-        HTTP::Cookies.from_headers(headers))
+        HTTP::Cookies.from_client_headers(headers))
 
       jar.clear do |cookie|
         cookie.path("/")
