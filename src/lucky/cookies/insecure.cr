@@ -2,7 +2,7 @@
 
 module HTTP
   class Cookie
-    def initialize(name : String, value : String, @path : String = "/",
+    def initialize(name : String, value : String, @path : String? = nil,
                    @expires : Time? = nil, @domain : String? = nil,
                    @secure : Bool = false, @http_only : Bool = false,
                    @samesite : SameSite? = nil, @extension : String? = nil)
@@ -42,7 +42,7 @@ module HTTP
 
         Cookie.new(
           URI.decode_www_form(match["name"]), URI.decode_www_form(match["value"]),
-          path: match["path"]? || "/",
+          path: match["path"]?,
           expires: expires,
           domain: match["domain"]?,
           secure: match["secure"]? != nil,

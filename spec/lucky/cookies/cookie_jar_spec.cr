@@ -80,7 +80,7 @@ describe Lucky::CookieJar do
         message = jar.get_raw(:message)
         message.http_only.should be_true
         message.expires.should be_nil
-        message.path.should eq "/"
+        message.path.should be_nil
         message.domain.should be_nil
         message.secure.should be_false
       end
@@ -117,7 +117,7 @@ describe Lucky::CookieJar do
     it "raises an error if the cookie is > 4096 bytes" do
       expect_raises(Lucky::CookieOverflowError) do
         jar = Lucky::CookieJar.empty_jar
-        jar.set_raw(:overflow, "x" * (4097 - 27)) # "overflow=x...x; path=/; HttpOnly",
+        jar.set_raw(:overflow, "x" * (4097 - 19)) # "overflow=x...x; HttpOnly",
       end
     end
   end
